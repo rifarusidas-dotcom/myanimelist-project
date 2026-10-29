@@ -1,0 +1,18 @@
+
+services:
+  database:
+    image: postgres:16
+    container_name: myanimelist_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: myanimelist
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
